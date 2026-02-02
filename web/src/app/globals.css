@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+}
+
+:root {
+  /* RAÍZES DO FUTURO - Premium Earth Palette */
+
+  /* Background: Soft Bone/Cream (Natural, not industrial gray) */
+  --background: oklch(0.98 0.02 95);
+
+  /* Foreground: Deep Charcoal (High Contrast, Readable) */
+  --foreground: oklch(0.20 0.02 95);
+
+  /* Card: Pure White or very subtle off-white */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.20 0.02 95);
+
+  /* Popover */
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.20 0.02 95);
+
+  /* Primary: Deep Forest Green (Trust, Nature, Growth) */
+  /* Was Lime, now a more serious/elegant Green */
+  --primary: oklch(0.35 0.10 140);
+  --primary-foreground: oklch(0.98 0 0);
+
+  /* Secondary: Earthy Terracotta/Brown (Soil, Roots) */
+  --secondary: oklch(0.55 0.12 60);
+  --secondary-foreground: oklch(0.98 0 0);
+
+  /* Muted: Sand/Stone (Warm neutrals) */
+  --muted: oklch(0.94 0.03 95);
+  --muted-foreground: oklch(0.40 0.04 95);
+  /* Much darker for readability */
+
+  /* Accent: Fresh Sprout Green (Highlight) */
+  --accent: oklch(0.85 0.15 110);
+  --accent-foreground: oklch(0.20 0.05 140);
+
+  /* Destructive */
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  /* Borders: Warm Stone */
+  --border: oklch(0.88 0.02 95);
+  --input: oklch(0.88 0.02 95);
+  --ring: oklch(0.35 0.10 140);
+
+  --radius: 0.75rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Deep Forest Night */
+
+    /* Background: Very Dark Green/Brown */
+    --background: oklch(0.12 0.03 140);
+    --foreground: oklch(0.95 0.02 95);
+
+    --card: oklch(0.18 0.03 140);
+    --card-foreground: oklch(0.95 0.02 95);
+
+    --popover: oklch(0.18 0.03 140);
+    --popover-foreground: oklch(0.95 0.02 95);
+
+    /* Primary: Vibrancy retained for dark mode */
+    --primary: oklch(0.60 0.14 140);
+    --primary-foreground: oklch(0.12 0.03 140);
+
+    /* Secondary */
+    --secondary: oklch(0.65 0.12 60);
+    --secondary-foreground: oklch(0.12 0.03 140);
+
+    /* Muted */
+    --muted: oklch(0.25 0.03 140);
+    --muted-foreground: oklch(0.70 0.04 95);
+    /* High contrast */
+
+    /* Accent */
+    --accent: oklch(0.30 0.05 140);
+    --accent-foreground: oklch(0.95 0.02 95);
+
+    --destructive: oklch(0.35 0.15 25);
+    --destructive-foreground: oklch(0.95 0.02 95);
+
+    --border: oklch(0.25 0.03 140);
+    --input: oklch(0.25 0.03 140);
+    --ring: oklch(0.60 0.14 140);
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography Enhancements */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-dark {
+  background: rgba(20, 30, 20, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dark .glass {
+  background: rgba(20, 30, 20, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
