@@ -235,9 +235,33 @@ export default function FishSystemPage() {
                                         <ClipboardList className="w-5 h-5 text-blue-600" />
                                         Ficha Técnica Operacional
                                     </CardTitle>
-                                    <CardDescription>Parâmetros exatos extraídos do projeto</CardDescription>
+                                    <CardDescription>Parâmetros exatos extraídos do projeto para Tilápia GIFT</CardDescription>
                                 </CardHeader>
-                                <CardContent className="space-y-6">
+                                <CardContent className="space-y-8">
+                                    {/* System Specs Mapping */}
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                        <div className="p-4 rounded-xl bg-muted/30 border border-border/50 flex flex-col items-center text-center group hover:border-blue-200 transition-all">
+                                            <Thermometer className="w-6 h-6 text-blue-500 mb-2" />
+                                            <span className="text-[10px] uppercase font-black text-muted-foreground tracking-tighter">Temperatura</span>
+                                            <span className="text-sm font-black text-foreground">26-30 <span className="text-[10px] font-bold text-muted-foreground">°C</span></span>
+                                        </div>
+                                        <div className="p-4 rounded-xl bg-muted/30 border border-border/50 flex flex-col items-center text-center group hover:border-blue-200 transition-all">
+                                            <Wind className="w-6 h-6 text-blue-500 mb-2" />
+                                            <span className="text-[10px] uppercase font-black text-muted-foreground tracking-tighter">O2 Dissolvido</span>
+                                            <span className="text-sm font-black text-foreground">&gt; 5.0 <span className="text-[10px] font-bold text-muted-foreground">mg/L</span></span>
+                                        </div>
+                                        <div className="p-4 rounded-xl bg-muted/30 border border-border/50 flex flex-col items-center text-center group hover:border-blue-200 transition-all">
+                                            <Droplets className="w-6 h-6 text-blue-500 mb-2" />
+                                            <span className="text-[10px] uppercase font-black text-muted-foreground tracking-tighter">pH Ideal</span>
+                                            <span className="text-sm font-black text-foreground">6.8 - 7.5</span>
+                                        </div>
+                                        <div className="p-4 rounded-xl bg-muted/30 border border-border/50 flex flex-col items-center text-center group hover:border-blue-200 transition-all">
+                                            <Target className="w-6 h-6 text-blue-500 mb-2" />
+                                            <span className="text-[10px] uppercase font-black text-muted-foreground tracking-tighter">Densidade</span>
+                                            <span className="text-sm font-black text-foreground">60 <span className="text-[10px] font-bold text-muted-foreground">kg/m³</span></span>
+                                        </div>
+                                    </div>
+
                                     {/* Ration Formula */}
                                     <div className="space-y-3">
                                         <h4 className="text-sm font-bold flex items-center gap-2">
@@ -294,6 +318,32 @@ export default function FishSystemPage() {
                                 </CardContent>
                             </Card>
                         </TabsContent>
+                        <TabsContent value="infrastructure" className="mt-4">
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>Infraestrutura Exigida</CardTitle>
+                                    <CardDescription>Ativos necessários para operação em alta densidade</CardDescription>
+                                </CardHeader>
+                                <CardContent className="space-y-6">
+                                    <div className="grid md:grid-cols-3 gap-4">
+                                        {[
+                                            { title: "Tanque Escavado", val: "R$ 15.000", desc: "1.000m² com revestimento." },
+                                            { title: "Aeradores (2cv)", val: "R$ 4.500", desc: "2 un por tanque. Oxigenação constante." },
+                                            { title: "Monitoramento", val: "R$ 3.200", desc: "Sensores de O2, pH e Temp (IoT)." }
+                                        ].map((item, i) => (
+                                            <div key={i} className="p-4 rounded-xl border bg-muted/50">
+                                                <div className="text-[10px] uppercase font-bold text-muted-foreground mb-1">{item.title}</div>
+                                                <div className="text-xl font-black">{item.val}</div>
+                                                <p className="text-[10px] opacity-70 mt-1">{item.desc}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="p-4 rounded-xl bg-orange-500/5 border border-orange-500/10 text-xs text-orange-800 dark:text-orange-400">
+                                        <strong>Crítico:</strong> A redundância de energia (Gerador ou Bateria) é mandatória para evitar perdas totais em quedas de luz superiores a 40 minutos.
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </TabsContent>
                     </Tabs>
 
                     {/* Integration Links */}
@@ -326,68 +376,34 @@ export default function FishSystemPage() {
                         </Link>
                     </div>
 
-                    {/* Technical Specifications - New Section */}
-                    <Card className="border-blue-200">
-                        <CardHeader>
-                            <div className="flex items-center gap-2">
-                                <ClipboardList className="w-5 h-5 text-blue-600" />
-                                <CardTitle>Especificações Técnicas (Target)</CardTitle>
-                            </div>
-                            <CardDescription>Parâmetros ideais para Tilápia GIFT em sistema intensivo</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                <div className="p-4 rounded-xl bg-muted/30 border border-border/50 flex flex-col items-center text-center group hover:border-blue-200 transition-all">
-                                    <Thermometer className="w-6 h-6 text-blue-500 mb-2" />
-                                    <span className="text-[10px] uppercase font-black text-muted-foreground tracking-tighter">Temperatura</span>
-                                    <span className="text-sm font-black text-foreground">26-30 <span className="text-[10px] font-bold text-muted-foreground">°C</span></span>
-                                </div>
-                                <div className="p-4 rounded-xl bg-muted/30 border border-border/50 flex flex-col items-center text-center group hover:border-blue-200 transition-all">
-                                    <Wind className="w-6 h-6 text-blue-500 mb-2" />
-                                    <span className="text-sm font-black text-foreground">&gt; 5.0 <span className="text-[10px] font-bold text-muted-foreground">mg/L</span></span>
-                                </div>
-                                <div className="p-4 rounded-xl bg-muted/30 border border-border/50 flex flex-col items-center text-center group hover:border-blue-200 transition-all">
-                                    <Droplets className="w-6 h-6 text-blue-500 mb-2" />
-                                    <span className="text-[10px] uppercase font-black text-muted-foreground tracking-tighter">pH Ideal</span>
-                                    <span className="text-sm font-black text-foreground">6.8 - 7.5</span>
-                                </div>
-                                <div className="p-4 rounded-xl bg-muted/30 border border-border/50 flex flex-col items-center text-center group hover:border-blue-200 transition-all">
-                                    <Target className="w-6 h-6 text-blue-500 mb-2" />
-                                    <span className="text-[10px] uppercase font-black text-muted-foreground tracking-tighter">Densidade</span>
-                                    <span className="text-sm font-black text-foreground">60 <span className="text-[10px] font-bold text-muted-foreground">kg/m³</span></span>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-
                     {/* Operational Narrative */}
                     <Card className="border-border/60 shadow- premium">
                         <CardHeader className="border-b bg-muted/30">
                             <CardTitle className="text-xl font-black text-foreground">Caderno Operacional: Ciclo de Engorda</CardTitle>
                         </CardHeader>
                         <CardContent className="prose lg:prose-lg max-w-none text-foreground py-8 px-6 dark:prose-invert">
-                            <p className="leading-relaxed text-lg">
+                            <p className="leading-relaxed text-lg font-light">
                                 O sistema de piscicultura do Projeto Raízes do Futuro utiliza a tecnologia de <strong>bioflocos adaptada</strong> ou recirculação assistida, focando na Tilápia GIFT por sua alta conversão alimentar e rusticidade.
                             </p>
 
-                            <div className="grid md:grid-cols-2 gap-10 mt-8">
-                                <section className="p-6 rounded-2xl bg-blue-50/30 border border-blue-100">
-                                    <h4 className="font-black text-blue-900 text-lg mb-3 flex items-center gap-3">
+                            <div className="grid md:grid-cols-2 gap-8 mt-6">
+                                <section className="p-6 rounded-2xl bg-blue-50/30 border border-blue-100 dark:bg-blue-900/10 dark:border-blue-900/30">
+                                    <h4 className="font-black text-blue-900 dark:text-blue-300 text-lg mb-3 flex items-center gap-3">
                                         <div className="w-2 h-6 rounded-full bg-blue-500" />
                                         Manejo Nutricional
                                     </h4>
-                                    <p className="text-muted-foreground leading-relaxed">
-                                        A alimentação é dividida em 4 fases, fornecida <strong>4 vezes ao dia</strong>, com ração produzida localmente. Utilizamos farelo de soja, milho e farinha de insetos (BSF - Moscadado Soldado Negro) para reduzir custos e aumentar a sustentabilidade, monitorando o FCR (Fator de Conversão Alimentar) rigorosamente abaixo de 1.4.
+                                    <p className="text-sm text-muted-foreground leading-relaxed">
+                                        A alimentação é dividida em 4 fases, fornecida <strong>4 vezes ao dia</strong>, com ração produzida localmente. Utilizamos farelo de soja, milho e farinha de insetos (BSF) para reduzir custos e aumentar a sustentabilidade.
                                     </p>
                                 </section>
 
-                                <section className="p-6 rounded-2xl bg-green-50/30 border border-green-100">
-                                    <h4 className="font-black text-green-900 text-lg mb-3 flex items-center gap-3">
+                                <section className="p-6 rounded-2xl bg-green-50/30 border border-green-100 dark:bg-green-900/10 dark:border-green-900/30">
+                                    <h4 className="font-black text-green-900 dark:text-green-300 text-lg mb-3 flex items-center gap-3">
                                         <div className="w-2 h-6 rounded-full bg-green-500" />
                                         Sanidade e Água
                                     </h4>
-                                    <p className="text-muted-foreground leading-relaxed">
-                                        O controle de amônia e nitrito é feito via probióticos e aeração constante. A água rica em nutrientes é decantada e enviada para o sistema de hortaliças, fechando o ciclo de nitrogênio do projeto.
+                                    <p className="text-sm text-muted-foreground leading-relaxed">
+                                        O controle de amônia e nitrito é feito via probióticos e aeração constante. A água rica em nutrientes é decantada e enviada para o sistema de hortaliças, fechando o ciclo de nitrogênio.
                                     </p>
                                 </section>
                             </div>

@@ -140,7 +140,7 @@ export default function OperationsPage() {
                                     <AccordionContent className="text-muted-foreground">
                                         <ul className="list-disc pl-5 space-y-1">
                                             <li>Amônia Total (TAN) e Nitrito.</li>
-                                            <li>Alcalinidade (Manter > 120mg/L).</li>
+                                            <li>Alcalinidade (Manter {">"} 120mg/L).</li>
                                             <li>Sólidos Suspensos (Imhoff).</li>
                                             <li>Aplicação de Calcário/Bicarbonato conforme necessidade.</li>
                                         </ul>
