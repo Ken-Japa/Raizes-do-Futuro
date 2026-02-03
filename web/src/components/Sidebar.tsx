@@ -19,7 +19,8 @@ import {
     Heart,
     Activity,
     DollarSign,
-    ArrowRight
+    ArrowRight,
+    Zap
 } from "lucide-react";
 import { useState } from "react";
 
@@ -50,6 +51,7 @@ const menuItems = [
             { name: "Aquaponia", href: "/systems/aquaponics", icon: Droplets },
             { name: "Fábrica de Ração", href: "/systems/feed", icon: Sprout },
             { name: "Avicultura", href: "/systems/chicken", icon: Bird },
+            { name: "Serviços & Atividades", href: "/systems/activities", icon: Zap },
         ],
     },
 ];

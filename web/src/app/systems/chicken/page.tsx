@@ -5,7 +5,10 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
-import { Bird, Egg, DollarSign, AlertTriangle, Calendar, ArrowRight, Factory, Trees, ClipboardList, Thermometer, Target, Home, ShieldCheck } from "lucide-react";
+import { Bird, Egg, DollarSign, AlertTriangle, Calendar, ArrowRight, Factory, Trees, ClipboardList, Thermometer, Target, Home, ShieldCheck, Scale, Info, Layers } from "lucide-react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 
 export default function ChickenSystemPage() {
@@ -58,7 +61,7 @@ export default function ChickenSystemPage() {
                         </div>
                     </div>
                     <Link href="/planning">
-                        <Button variant="outline" size="sm" className="border-amber-200 hover:bg-amber-100 text-amber-900">
+                        <Button variant="outline" size="sm" className="border-amber-200 dark:border-amber-900 hover:bg-amber-100 dark:hover:bg-amber-900/40 text-amber-900 dark:text-amber-200">
                             Ver Cronograma <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
                     </Link>
@@ -120,161 +123,148 @@ export default function ChickenSystemPage() {
                 {/* Financials */}
                 <div className="lg:col-span-2 space-y-6">
 
-                    <div className="grid sm:grid-cols-3 gap-4">
-                        <Card>
-                            <CardHeader className="pb-2">
-                                <CardTitle className="text-sm font-medium text-muted-foreground">Ovos / Mês</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="text-2xl font-bold flex items-center gap-2">
-                                    <Egg className="w-5 h-5 opacity-50" />
-                                    {(dailyEggs * 30).toFixed(0)}
-                                </div>
-                                <p className="text-xs opacity-70 mt-1">{(dailyEggs * 30 / 12).toFixed(0)} dúzias</p>
-                            </CardContent>
-                        </Card>
+                    <Tabs defaultValue="financial" className="w-full">
+                        <TabsList className="grid w-full grid-cols-4">
+                            <TabsTrigger value="financial">Viabilidade</TabsTrigger>
+                            <TabsTrigger value="ecological">Ecologia</TabsTrigger>
+                            <TabsTrigger value="technical">Ficha Técnica</TabsTrigger>
+                            <TabsTrigger value="infrastructure">Estrutura</TabsTrigger>
+                        </TabsList>
 
-                        <Card>
-                            <CardHeader className="pb-2">
-                                <CardTitle className="text-sm font-medium text-muted-foreground">Custo Ração / Mês</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="text-2xl font-bold text-red-400">{formatCurrency(monthlyFeedCost)}</div>
-                                <p className="text-xs opacity-70 mt-1">{(birds * feedPerBirdDay * 30).toFixed(0)}kg de ração</p>
-                            </CardContent>
-                        </Card>
+                        <TabsContent value="financial" className="mt-4">
+                            <div className="grid sm:grid-cols-3 gap-4">
+                                <Card>
+                                    <CardHeader className="pb-2">
+                                        <CardTitle className="text-sm font-medium text-muted-foreground">Ovos / Mês</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <div className="text-2xl font-bold flex items-center gap-2">
+                                            <Egg className="w-5 h-5 opacity-50" />
+                                            {(dailyEggs * 30).toFixed(0)}
+                                        </div>
+                                        <p className="text-xs opacity-70 mt-1">{(dailyEggs * 30 / 12).toFixed(0)} dúzias</p>
+                                    </CardContent>
+                                </Card>
 
-                        <Card className="bg-amber-500/10 border-amber-500/20">
-                            <CardHeader className="pb-2">
-                                <CardTitle className="text-sm font-medium text-amber-700 dark:text-amber-500">Lucro Líquido / Mês</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="text-2xl font-bold text-amber-700 dark:text-amber-500">{formatCurrency(monthlyProfit)}</div>
-                                <p className="text-xs opacity-70 mt-1">Margem: {((monthlyProfit / monthlyRevenue) * 100).toFixed(0)}%</p>
-                            </CardContent>
-                        </Card>
-                    </div>
+                                <Card>
+                                    <CardHeader className="pb-2">
+                                        <CardTitle className="text-sm font-medium text-muted-foreground">Custo Ração / Mês</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <div className="text-2xl font-bold text-red-400">{formatCurrency(monthlyFeedCost)}</div>
+                                        <p className="text-xs opacity-70 mt-1">{(birds * feedPerBirdDay * 30).toFixed(0)}kg de ração</p>
+                                    </CardContent>
+                                </Card>
 
-                    {/* Technical Specifications */}
-                    <Card className="border-amber-200">
-                        <CardHeader>
-                            <div className="flex items-center gap-2">
-                                <ClipboardList className="w-5 h-5 text-amber-700" />
-                                <CardTitle>Especificações Técnicas (Target)</CardTitle>
+                                <Card className="bg-amber-500/10 border-amber-500/20">
+                                    <CardHeader className="pb-2">
+                                        <CardTitle className="text-sm font-medium text-amber-700 dark:text-amber-500">Lucro Líquido / Mês</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <div className="text-2xl font-bold text-amber-700 dark:text-amber-500">{formatCurrency(monthlyProfit)}</div>
+                                        <p className="text-xs opacity-70 mt-1">Margem: {((monthlyProfit / monthlyRevenue) * 100).toFixed(0)}%</p>
+                                    </CardContent>
+                                </Card>
                             </div>
-                            <CardDescription>Parâmetros para a raça Australorp em pastoreio</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center group hover:border-amber-200 transition-all">
-                                    <Home className="w-6 h-6 text-amber-700 mb-2" />
-                                    <span className="text-[10px] uppercase font-black text-slate-400 tracking-tighter">Área Piquete</span>
-                                    <span className="text-sm font-black text-slate-900">5 <span className="text-[10px] font-bold text-slate-500">m²/ave</span></span>
-                                </div>
-                                <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center group hover:border-amber-200 transition-all">
-                                    <Thermometer className="w-6 h-6 text-amber-700 mb-2" />
-                                    <span className="text-[10px] uppercase font-black text-slate-400 tracking-tighter">Consumo Ração</span>
-                                    <span className="text-sm font-black text-slate-900">120 <span className="text-[10px] font-bold text-slate-500">g/dia</span></span>
-                                </div>
-                                <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center group hover:border-amber-200 transition-all">
-                                    <ShieldCheck className="w-6 h-6 text-amber-700 mb-2" />
-                                    <span className="text-[10px] uppercase font-black text-slate-400 tracking-tighter">Ninhos</span>
-                                    <span className="text-sm font-black text-slate-900">1 / 5 <span className="text-[10px] font-bold text-slate-500">aves</span></span>
-                                </div>
-                                <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center group hover:border-amber-200 transition-all">
-                                    <Target className="w-6 h-6 text-amber-700 mb-2" />
-                                    <span className="text-[10px] uppercase font-black text-slate-400 tracking-tighter">Prod. Anual</span>
-                                    <span className="text-sm font-black text-slate-900">250-300 <span className="text-[10px] font-bold text-slate-500">ovos</span></span>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
 
-                    {/* Operational Narrative */}
-                    <Card className="border-slate-200 shadow-sm">
-                        <CardHeader className="border-b bg-slate-50/50">
-                            <CardTitle className="text-xl font-black text-slate-900">Caderno Operacional: Avicultura Australorp</CardTitle>
-                        </CardHeader>
-                        <CardContent className="prose lg:prose-lg max-w-none text-slate-700 py-8 px-6">
-                            <p className="leading-relaxed text-lg">
-                                A escolha da raça <strong>Australorp Black</strong> deve-se à sua excepcional docilidade e taxa de postura constante, mesmo em climas variáveis. No Raízes do Futuro, elas atuam como "tratores biológicos".
-                            </p>
-                            <div className="grid md:grid-cols-2 gap-10 mt-8">
-                                <section className="p-6 rounded-2xl bg-amber-50/30 border border-amber-100">
-                                    <h4 className="font-black text-amber-900 text-lg mb-3 flex items-center gap-3">
-                                        <div className="w-2 h-6 rounded-full bg-amber-500" />
-                                        Manejo de Pastoreio
-                                    </h4>
-                                    <p className="text-slate-600 leading-relaxed">
-                                        As aves são rotacionadas entre piquetes da Agrofloresta (SAF). Isso permite que o solo descanse, as galinhas controlem larvas de insetos e adubem as linhas de árvores frutíferas naturalmente.
-                                    </p>
-                                </section>
-                                <section className="p-6 rounded-2xl bg-orange-50/30 border border-orange-100">
-                                    <h4 className="font-black text-orange-900 text-lg mb-3 flex items-center gap-3">
-                                        <div className="w-2 h-6 rounded-full bg-orange-500" />
-                                        Suplementação Local
-                                    </h4>
-                                    <p className="text-slate-600 leading-relaxed">
-                                        A ração produzida na fazenda é complementada com folhas de amoreira e moringa (proteína verde) e resíduos da aquaponia, garantindo ovos com gema de cor intensa e alto valor nutricional.
-                                    </p>
-                                </section>
-                            </div>
-                        </CardContent>
-                    </Card>
-
-                    {/* Integrated Flows */}
-                    <div className="grid sm:grid-cols-2 gap-4">
-                        <Link href="/systems/feed">
-                            <Card className="hover:bg-muted/50 transition-colors cursor-pointer border-dashed h-full">
-                                <CardHeader className="p-4 pb-2">
-                                    <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground flex items-center gap-2">
-                                        <Factory className="w-3 h-3" /> Origem do Insumo
+                            {/* Analysis */}
+                            <Card className="mt-4">
+                                <CardHeader>
+                                    <CardTitle className="flex items-center gap-2">
+                                        <AlertTriangle className="w-5 h-5 text-amber-500" />
+                                        Ponto de Atenção
                                     </CardTitle>
                                 </CardHeader>
-                                <CardContent className="p-4 pt-0">
-                                    <div className="font-semibold text-amber-700 dark:text-amber-400">Fábrica de Ração</div>
-                                    <p className="text-xs text-muted-foreground mt-1">Milho e Soja processados localmente.</p>
+                                <CardContent className="text-sm text-muted-foreground space-y-2">
+                                    <p>
+                                        A viabilidade da avicultura depende drasticamente do <strong>custo da ração</strong>. Com ração comercial (R$ 3,80/kg), sua margem cai para menos de 20%.
+                                    </p>
+                                    <p>
+                                        Este simulador assume que você está usando a <strong>Fábrica de Ração Própria</strong> (R$ {feedCostKg.toFixed(2)}/kg).
+                                    </p>
+                                    <div className="p-3 bg-amber-500/5 rounded-md mt-4 font-medium text-amber-900 border border-amber-500/10">
+                                        Dica: As galinhas também consomem resíduos da horta (Aquaponia) e insetos do pasto, o que pode reduzir o custo de alimentação em até 15%.
+                                    </div>
                                 </CardContent>
                             </Card>
-                        </Link>
-                        <Link href="/systems/forest">
-                            <Card className="hover:bg-muted/50 transition-colors cursor-pointer border-dashed h-full">
-                                <CardHeader className="p-4 pb-2">
-                                    <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground flex items-center gap-2">
-                                        <Trees className="w-3 h-3" /> Serviço Prestado
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent className="p-4 pt-0">
-                                    <div className="font-semibold text-green-700 dark:text-green-400">Agrofloresta</div>
-                                    <p className="text-xs text-muted-foreground mt-1">Controle biológico e adubação das linhas.</p>
-                                </CardContent>
-                            </Card>
-                        </Link>
-                    </div>
+                        </TabsContent>
 
-                    {/* Analysis */}
-                    <Card>
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <AlertTriangle className="w-5 h-5 text-amber-500" />
-                                Ponto de Atenção
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="text-sm text-muted-foreground space-y-2">
-                            <p>
-                                A viabilidade da avicultura depende drasticamente do <strong>custo da ração</strong>. Com ração comercial (R$ 3,80/kg), sua margem cai para menos de 20%.
-                            </p>
-                            <p>
-                                Este simulador assume que você está usando a <strong>Fábrica de Ração Própria</strong> (R$ {feedCostKg.toFixed(2)}/kg).
-                            </p>
-                            <div className="p-3 bg-muted rounded-md mt-4 font-medium text-foreground">
-                                Dica: As galinhas também consomem resíduos da horta (Aquaponia) e insetos do pasto, o que pode reduzir o custo de alimentação em até 15%.
-                            </div>
-                        </CardContent>
-                    </Card>
+                        <TabsContent value="technical" className="mt-4">
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle className="flex items-center gap-2">
+                                        <ClipboardList className="w-5 h-5 text-amber-700" />
+                                        Ficha Técnica de Manejo
+                                    </CardTitle>
+                                    <CardDescription>Parâmetros exatos extraídos do projeto</CardDescription>
+                                </CardHeader>
+                                <CardContent className="space-y-6">
+                                    {/* Function Roles */}
+                                    <div className="space-y-3">
+                                        <h4 className="text-sm font-bold flex items-center gap-2">
+                                            <Layers className="w-4 h-4 text-amber-600" /> Papéis Funcionais no Ecossistema
+                                        </h4>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div className="p-4 rounded-xl border bg-card">
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <Badge className="bg-amber-600">Galinhas Poedeiras</Badge>
+                                                    <span className="text-xs font-bold font-mono">Australorp</span>
+                                                </div>
+                                                <p className="text-xs text-muted-foreground leading-relaxed">
+                                                    "Tratores Biológicos". Responsáveis pelo revolvimento do solo em piquetes SAF, controle de formigas e adubação nitrogenada direta.
+                                                </p>
+                                            </div>
+                                            <div className="p-4 rounded-xl border bg-card">
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <Badge className="bg-cyan-600">Patos</Badge>
+                                                    <span className="text-xs font-bold font-mono">Pequim/Caipira</span>
+                                                </div>
+                                                <p className="text-xs text-muted-foreground leading-relaxed">
+                                                    "Controle Seletivo". Atuam em áreas úmidas e SAFs para controle de caramujos, lesmas e pragas que galinhas evitam. Não destroem hortaliças.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Tech Matrix */}
+                                    <div className="space-y-3">
+                                        <h4 className="text-sm font-bold flex items-center gap-2">
+                                            <Info className="w-4 h-4 text-amber-600" /> Matriz de Desempenho
+                                        </h4>
+                                        <Table>
+                                            <TableHeader>
+                                                <TableRow>
+                                                    <TableHead>Indicador</TableHead>
+                                                    <TableHead>Meta Raízes</TableHead>
+                                                    <TableHead>Observação</TableHead>
+                                                </TableRow>
+                                            </TableHeader>
+                                            <TableBody>
+                                                <TableRow>
+                                                    <TableCell className="font-medium text-xs">Área de Piquete</TableCell>
+                                                    <TableCell className="text-xs font-bold">5 m²/ave</TableCell>
+                                                    <TableCell className="text-xs">Sistema rotacionado</TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell className="font-medium text-xs">Consumo Ração</TableCell>
+                                                    <TableCell className="text-xs font-bold">120 g/dia</TableCell>
+                                                    <TableCell className="text-xs">Média anual</TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell className="font-medium text-xs">Postura Esperada</TableCell>
+                                                    <TableCell className="text-xs font-bold">80-90%</TableCell>
+                                                    <TableCell className="text-xs">Australorp Black</TableCell>
+                                                </TableRow>
+                                            </TableBody>
+                                        </Table>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </TabsContent>
+                    </Tabs>
 
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
