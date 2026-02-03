@@ -42,8 +42,8 @@
 :root {
   /* RAÍZES DO FUTURO - Premium Earth Palette */
 
-  /* Background: Soft Bone/Cream (Natural, not industrial gray) */
-  --background: oklch(0.98 0.02 95);
+  /* Background: Premium Bone White (#fdfcfb) */
+  --background: oklch(0.99 0.005 60);
 
   /* Foreground: Deep Charcoal (High Contrast, Readable) */
   --foreground: oklch(0.20 0.02 95);
@@ -166,9 +166,18 @@ h6 {
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .shadow-premium {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  }
+
+  .border-premium {
+    border: 1px solid var(--border);
+    box-shadow: 0 0 0 1px rgba(226, 232, 240, 0.5);
+    /* ring-slate-200/50 equivalent */
   }
 }

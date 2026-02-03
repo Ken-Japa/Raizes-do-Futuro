@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
-import { Fish, TrendingUp, AlertCircle, DollarSign, Scale, ArrowRight, Calendar, Factory, Sprout } from "lucide-react";
+import { Fish, TrendingUp, AlertCircle, DollarSign, Scale, ArrowRight, Calendar, Factory, Sprout, Thermometer, Droplets, Wind, Zap, ClipboardList, Target } from "lucide-react";
 import Link from "next/link";
 
 export default function FishSystemPage() {
@@ -203,6 +203,75 @@ export default function FishSystemPage() {
                             </Card>
                         </Link>
                     </div>
+
+                    {/* Technical Specifications - New Section */}
+                    <Card className="border-blue-200">
+                        <CardHeader>
+                            <div className="flex items-center gap-2">
+                                <ClipboardList className="w-5 h-5 text-blue-600" />
+                                <CardTitle>Especificações Técnicas (Target)</CardTitle>
+                            </div>
+                            <CardDescription>Parâmetros ideais para Tilápia GIFT em sistema intensivo</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center group hover:border-blue-200 transition-all">
+                                    <Thermometer className="w-6 h-6 text-blue-500 mb-2" />
+                                    <span className="text-[10px] uppercase font-black text-slate-400 tracking-tighter">Temperatura</span>
+                                    <span className="text-sm font-black text-slate-900">26-30 <span className="text-[10px] font-bold text-slate-500">°C</span></span>
+                                </div>
+                                <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center group hover:border-blue-200 transition-all">
+                                    <Wind className="w-6 h-6 text-blue-500 mb-2" />
+                                    <span className="text-[10px] uppercase font-black text-slate-400 tracking-tighter">Oxigênio</span>
+                                    <span className="text-sm font-black text-slate-900">&gt; 5.0 <span className="text-[10px] font-bold text-slate-500">mg/L</span></span>
+                                </div>
+                                <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center group hover:border-blue-200 transition-all">
+                                    <Droplets className="w-6 h-6 text-blue-500 mb-2" />
+                                    <span className="text-[10px] uppercase font-black text-slate-400 tracking-tighter">pH Ideal</span>
+                                    <span className="text-sm font-black text-slate-900">6.8 - 7.5</span>
+                                </div>
+                                <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center group hover:border-blue-200 transition-all">
+                                    <Target className="w-6 h-6 text-blue-500 mb-2" />
+                                    <span className="text-[10px] uppercase font-black text-slate-400 tracking-tighter">Densidade</span>
+                                    <span className="text-sm font-black text-slate-900">60 <span className="text-[10px] font-bold text-slate-500">kg/m³</span></span>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    {/* Operational Narrative */}
+                    <Card className="border-slate-200 shadow-sm">
+                        <CardHeader className="border-b bg-slate-50/50">
+                            <CardTitle className="text-xl font-black text-slate-900">Caderno Operacional: Ciclo de Engorda</CardTitle>
+                        </CardHeader>
+                        <CardContent className="prose lg:prose-lg max-w-none text-slate-700 py-8 px-6">
+                            <p className="leading-relaxed text-lg">
+                                O sistema de piscicultura do Projeto Raízes do Futuro utiliza a tecnologia de <strong>bioflocos adaptada</strong> ou recirculação assistida, focando na Tilápia GIFT por sua alta conversão alimentar e rusticidade.
+                            </p>
+
+                            <div className="grid md:grid-cols-2 gap-10 mt-8">
+                                <section className="p-6 rounded-2xl bg-blue-50/30 border border-blue-100">
+                                    <h4 className="font-black text-blue-900 text-lg mb-3 flex items-center gap-3">
+                                        <div className="w-2 h-6 rounded-full bg-blue-500" />
+                                        Manejo Nutricional
+                                    </h4>
+                                    <p className="text-slate-600 leading-relaxed">
+                                        A alimentação é dividida em 4 fases, com ração produzida localmente. Utilizamos farelo de soja, milho e farinha de insetos (BSF) para reduzir custos e aumentar a sustentabilidade, monitorando o FCR (Fator de Conversão Alimentar) rigorosamente abaixo de 1.4.
+                                    </p>
+                                </section>
+
+                                <section className="p-6 rounded-2xl bg-green-50/30 border border-green-100">
+                                    <h4 className="font-black text-green-900 text-lg mb-3 flex items-center gap-3">
+                                        <div className="w-2 h-6 rounded-full bg-green-500" />
+                                        Sanidade e Água
+                                    </h4>
+                                    <p className="text-slate-600 leading-relaxed">
+                                        O controle de amônia e nitrito é feito via probióticos e aeração constante. A água rica em nutrientes é decantada e enviada para o sistema de hortaliças, fechando o ciclo de nitrogênio do projeto.
+                                    </p>
+                                </section>
+                            </div>
+                        </CardContent>
+                    </Card>
 
                     {/* Smart Insights */}
                     <Card className="border-primary/20">

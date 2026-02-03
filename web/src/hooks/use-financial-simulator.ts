@@ -5,7 +5,8 @@ import {
     CAPEX_DATA,
     INITIAL_ANIMALS,
     RECURRING_OPEX,
-    YEARLY_REVENUE_BASE
+    YEARLY_REVENUE_BASE,
+    ACTIVITY_DETAILS
 } from "../data/project-finances";
 
 export interface SimulationSettings {
@@ -16,9 +17,25 @@ export interface SimulationSettings {
     opexBuffer: number; // Percentage (eg. 0.1 for 10%)
 }
 
+// Annotation data for the first 12 years
+const YEAR_ANNOTATIONS: Record<number, string> = {
+    1: "Implantação e Obras",
+    2: "Maturação Proteína",
+    3: "Início Vendas Ovos/Carne",
+    4: "Escala Piscicultura",
+    5: "Início Frutas SAF",
+    6: "Expansão Comercial",
+    7: "Pico Produtivo SAF",
+    8: "Estabilização Operacional",
+    9: "Manejamento Madeireira",
+    10: "Ponto de Payback",
+    11: "Escala Comercial Alta",
+    12: "Autossuficiência Plena",
+};
+
 export const useFinancialSimulator = () => {
     const [settings, setSettings] = useState<SimulationSettings>({
-        isFinancingEnabled: true,
+        isFinancingEnabled: false,
         financingAmount: 850000,
         interestRate: 0.03, // 3% a.a. (PRONAF)
         financingPeriod: 10,
@@ -40,44 +57,44 @@ export const useFinancialSimulator = () => {
 
         // Total investment is roughly Year 0/1 combined
         const initialOutlay = baseCapex;
-
         const actualFinancing = settings.isFinancingEnabled ? settings.financingAmount : 0;
 
         let baselineCumulative = -initialOutlay;
         let customCumulative = -(initialOutlay - actualFinancing);
 
         const projections = years.map((year) => {
-            // Get base revenue (fallback to growth for years > 14)
+            // Get base revenue
             let baseRevenue = 0;
-            const baseRevData = YEARLY_REVENUE_BASE.find(d => d.year === year);
+            const baseRevData = YEARLY_REVENUE_BASE.find((d: { year: number; revenue: number }) => d.year === year);
 
             if (baseRevData) {
                 baseRevenue = baseRevData.revenue;
             } else {
-                // Growth estimation post Year 14 (~10% linear growth based on trend)
                 const lastRev = YEARLY_REVENUE_BASE[YEARLY_REVENUE_BASE.length - 1].revenue;
                 baseRevenue = lastRev + (year - 14) * 100000;
             }
 
-            // Base Opex (increases slowly after year 10)
+            // Base Opex
             const yearOpex = year > 10 ? baseOpex * (1 + (year - 10) * 0.05) : baseOpex;
+            const customOpex = yearOpex * (1 + settings.opexBuffer);
 
             // Financing Payments
             let financingPayment = 0;
             if (settings.isFinancingEnabled) {
                 if (year >= 4 && year < 4 + settings.financingPeriod) {
-                    // Simple amortization + interest on remainder
                     const principal = settings.financingAmount / settings.financingPeriod;
                     financingPayment = principal * (1 + settings.interestRate);
                 } else if (year >= 1 && year < 4) {
-                    // Interest only during grace period
                     financingPayment = settings.financingAmount * settings.interestRate;
                 }
             }
 
-            const customOpex = yearOpex * (1 + settings.opexBuffer);
+            // Net revenue (Receita Líquida = Revenue - Opex)
+            const netRevenue = baseRevenue - customOpex;
 
-            // Calculate results
+            // Investment (Only year 1 typically for this model, or financing principal if we want to show it as "cost")
+            const yearInvestment = year === 1 ? (initialOutlay - actualFinancing) : 0;
+
             const baselineResult = baseRevenue - yearOpex;
             const customResult = baseRevenue - customOpex - financingPayment;
 
@@ -86,9 +103,12 @@ export const useFinancialSimulator = () => {
 
             return {
                 year,
+                annotation: YEAR_ANNOTATIONS[year] || "",
                 baseRevenue,
                 baseOpex: yearOpex,
                 customOpex,
+                netRevenue,
+                investment: yearInvestment,
                 financingPayment,
                 baselineResult,
                 customResult,
@@ -116,6 +136,7 @@ export const useFinancialSimulator = () => {
                 roi10yCustom,
                 totalCapex: baseCapex,
             },
+            activityDetails: ACTIVITY_DETAILS,
             settings,
             setSettings
         };

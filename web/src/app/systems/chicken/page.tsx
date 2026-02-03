@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
-import { Bird, Egg, DollarSign, AlertTriangle, Calendar, ArrowRight, Factory, Trees } from "lucide-react";
+import { Bird, Egg, DollarSign, AlertTriangle, Calendar, ArrowRight, Factory, Trees, ClipboardList, Thermometer, Target, Home, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 
 export default function ChickenSystemPage() {
@@ -154,6 +154,73 @@ export default function ChickenSystemPage() {
                             </CardContent>
                         </Card>
                     </div>
+
+                    {/* Technical Specifications */}
+                    <Card className="border-amber-200">
+                        <CardHeader>
+                            <div className="flex items-center gap-2">
+                                <ClipboardList className="w-5 h-5 text-amber-700" />
+                                <CardTitle>Especificações Técnicas (Target)</CardTitle>
+                            </div>
+                            <CardDescription>Parâmetros para a raça Australorp em pastoreio</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center group hover:border-amber-200 transition-all">
+                                    <Home className="w-6 h-6 text-amber-700 mb-2" />
+                                    <span className="text-[10px] uppercase font-black text-slate-400 tracking-tighter">Área Piquete</span>
+                                    <span className="text-sm font-black text-slate-900">5 <span className="text-[10px] font-bold text-slate-500">m²/ave</span></span>
+                                </div>
+                                <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center group hover:border-amber-200 transition-all">
+                                    <Thermometer className="w-6 h-6 text-amber-700 mb-2" />
+                                    <span className="text-[10px] uppercase font-black text-slate-400 tracking-tighter">Consumo Ração</span>
+                                    <span className="text-sm font-black text-slate-900">120 <span className="text-[10px] font-bold text-slate-500">g/dia</span></span>
+                                </div>
+                                <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center group hover:border-amber-200 transition-all">
+                                    <ShieldCheck className="w-6 h-6 text-amber-700 mb-2" />
+                                    <span className="text-[10px] uppercase font-black text-slate-400 tracking-tighter">Ninhos</span>
+                                    <span className="text-sm font-black text-slate-900">1 / 5 <span className="text-[10px] font-bold text-slate-500">aves</span></span>
+                                </div>
+                                <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center group hover:border-amber-200 transition-all">
+                                    <Target className="w-6 h-6 text-amber-700 mb-2" />
+                                    <span className="text-[10px] uppercase font-black text-slate-400 tracking-tighter">Prod. Anual</span>
+                                    <span className="text-sm font-black text-slate-900">250-300 <span className="text-[10px] font-bold text-slate-500">ovos</span></span>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    {/* Operational Narrative */}
+                    <Card className="border-slate-200 shadow-sm">
+                        <CardHeader className="border-b bg-slate-50/50">
+                            <CardTitle className="text-xl font-black text-slate-900">Caderno Operacional: Avicultura Australorp</CardTitle>
+                        </CardHeader>
+                        <CardContent className="prose lg:prose-lg max-w-none text-slate-700 py-8 px-6">
+                            <p className="leading-relaxed text-lg">
+                                A escolha da raça <strong>Australorp Black</strong> deve-se à sua excepcional docilidade e taxa de postura constante, mesmo em climas variáveis. No Raízes do Futuro, elas atuam como "tratores biológicos".
+                            </p>
+                            <div className="grid md:grid-cols-2 gap-10 mt-8">
+                                <section className="p-6 rounded-2xl bg-amber-50/30 border border-amber-100">
+                                    <h4 className="font-black text-amber-900 text-lg mb-3 flex items-center gap-3">
+                                        <div className="w-2 h-6 rounded-full bg-amber-500" />
+                                        Manejo de Pastoreio
+                                    </h4>
+                                    <p className="text-slate-600 leading-relaxed">
+                                        As aves são rotacionadas entre piquetes da Agrofloresta (SAF). Isso permite que o solo descanse, as galinhas controlem larvas de insetos e adubem as linhas de árvores frutíferas naturalmente.
+                                    </p>
+                                </section>
+                                <section className="p-6 rounded-2xl bg-orange-50/30 border border-orange-100">
+                                    <h4 className="font-black text-orange-900 text-lg mb-3 flex items-center gap-3">
+                                        <div className="w-2 h-6 rounded-full bg-orange-500" />
+                                        Suplementação Local
+                                    </h4>
+                                    <p className="text-slate-600 leading-relaxed">
+                                        A ração produzida na fazenda é complementada com folhas de amoreira e moringa (proteína verde) e resíduos da aquaponia, garantindo ovos com gema de cor intensa e alto valor nutricional.
+                                    </p>
+                                </section>
+                            </div>
+                        </CardContent>
+                    </Card>
 
                     {/* Integrated Flows */}
                     <div className="grid sm:grid-cols-2 gap-4">
